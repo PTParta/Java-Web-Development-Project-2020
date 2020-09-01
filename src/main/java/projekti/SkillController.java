@@ -24,7 +24,7 @@ public class SkillController {
     @PostMapping("/wall/{user}/skill")
     public String addSkill(@PathVariable String user, @RequestParam String skillName, RedirectAttributes redirectAttributes) {
 
-        if (skillName.isBlank()) {
+        if (skillName.isEmpty()) {
             return "redirect:/wall/" + user;
         }
         Account a = accountRepository.findByUsername(user);
