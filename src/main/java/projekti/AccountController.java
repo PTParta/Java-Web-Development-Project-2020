@@ -31,10 +31,10 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping("/signup")
+    @GetMapping("signup")
     public String signup(@ModelAttribute Account account) {
 
-        return "/signup";
+        return "signup";
     }
 
     @PostMapping("/signup")
