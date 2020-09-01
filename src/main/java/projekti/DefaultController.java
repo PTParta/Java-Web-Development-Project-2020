@@ -15,7 +15,7 @@ public class DefaultController {
     }
 
     
-    @GetMapping("/login")
+    @GetMapping("login")
     public String login(Model model) {
         
         return "login";
