@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Signup</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
+
+                </head>
+                <center>
+                    <div class="container" style="padding-top:50px">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8">
+                                <h1 style="padding-top: 10px">Sign up to</h1>
+                                <h1 style="padding-bottom:40px">Jobial</h1>
+                                <!--p style="padding-top: 20px">
+                                    To sign up fill the fields below
+                                </p-->
+                                <form method='POST' th:action="@{/signup}" th:object="${account}">
+                                    <table>
+                                        <tr>
+                                            <td><input type="text"
+                                                       name='username'
+                                                       placeholder="User name" 
+                                                       style="width: 250px"
+                                                       th:field="*{username}" />
+                                            </td>
+                                            <tr>
+                                                <td th:if="${#fields.hasErrors('username')}"
+                                                    th:errors="*{username}"
+                                                    style="color:red">username error message</td>
+                                            </tr>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text"
+                                                       name='profileName'
+                                                       placeholder="Profile name" 
+                                                       style="width: 250px"
+                                                       th:field="*{profileName}" />
+                                            </td>
+                                            <tr>
+                                                <td th:if="${#fields.hasErrors('profileName')}"
+                                                    th:errors="*{profileName}"
+                                                    style="color:red">profile name error message</td>
+                                            </tr>
+                                        </tr>
+                                        <tr>
+                                            <td><input type='text'
+                                                       name='name'
+                                                       placeholder="Name" 
+                                                       style="width: 250px">
+                                            </td>
+                                            <tr>
+                                                <td th:if="${#fields.hasErrors('name')}"
+                                                    th:errors="*{name}"
+                                                    style="color:red">first name error message</td>
+                                            </tr>
+                                        </tr>
+                                        <tr>
+                                            <td><input type='password'
+                                                       name='password'
+                                                       placeholder="Password (6 or more characters)"
+                                                       style="width: 250px">
+                                            </td>
+                                            <tr>
+                                                <td th:if="${#fields.hasErrors('password')}"
+                                                    th:errors="*{password}"
+                                                    style="color:red">password error message</td>
+                                            </tr>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 20px">
+                                                <input name="submit"
+                                                       type="submit"
+                                                       value="Sign up"
+                                                       style="width: 250px"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+                </center>
+

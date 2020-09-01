@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Connections</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
+                </head>
+
+                <center>
+
+                    <!--Connections-->
+                    <div class="container" style="padding-top: 40px">
+                        <h1>Connections</h1>
+                        <div class="row col-md-7 table-responsive">
+                            <table id="Connections" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="connection, rowStat: ${connections}">
+                                        <div th:if="${connection.requestSender.username==currentUser}">
+                                            <td>
+                                                <a th:href="@{/wall/{profile}(profile=${connection.requestReceiver.profileName})}"
+                                                   th:text="${connection.requestReceiver.profileName}">profile name>profile</a>
+                                            </td>
+                                            <!--td th:text="${connection.requestReceiver.profileName}">profile name</td-->
+                                        </div>
+                                        <div th:unless="${connection.requestSender.username==currentUser}">
+                                            <td>
+                                                <a th:href="@{/wall/{profile}(profile=${connection.requestSender.profileName})}"
+                                                   th:text="${connection.requestSender.profileName}">profile</a>
+                                            </td>
+                                            <!--td th:text="${connection.requestSender.profileName}">profile name</td-->
+                                        </div>
+                                        <td>
+                                            <div th:if="${connection.requestSender.username==currentUser}">
+                                                <form
+                                                    method='POST'
+                                                    th:action="@{/connections/remove/{connectionToBeRemoved}(connectionToBeRemoved=${connection.requestReceiver.profileName})}">
+                                                    <input name="submit"
+                                                           type="submit"
+                                                           value="remove"
+                                                           style="width: 100px; background-color: lightcoral"
+                                                           onclick="return confirm('Are you sure you want to remove this connection?')"
+                                                           />
+                                                </form>
+                                            </div>
+
+                                            <div th:unless="${connection.requestSender.username==currentUser}">
+                                                <form
+                                                    method='POST'
+                                                    th:action="@{/connections/remove/{connectionToBeRemoved}(connectionToBeRemoved=${connection.requestSender.profileName})}">
+                                                    <input name="submit"
+                                                           type="submit"
+                                                           value="remove"
+                                                           style="width: 100px; background-color: lightcoral"
+                                                           onclick="return confirm('Are you sure you want to remove this connection?')"
+                                                           />
+                                                </form>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--Rejected accounts-->
+                    <div class="container" style="padding-top: 40px">
+                        <h1>Rejected connection requests</h1>
+                        <div class="row col-md-7 table-responsive">
+                            <table id="rejectedConnectionRequests" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="rejectedConnection, rowStat: ${rejectedConnections}">
+                                        <div th:if="${rejectedConnection.requestSender.username==currentUser}">
+                                            <td>
+                                                <a th:href="@{/wall/{profile}(profile=${rejectedConnection.requestReceiver.profileName})}"
+                                                   th:text="${rejectedConnection.requestReceiver.profileName}">profile</a>
+                                            </td>
+                                            <!--td th:text="${rejectedConnection.requestReceiver.profileName}">profile name</td-->
+                                        </div>
+                                        <div th:unless="${rejectedConnection.requestSender.username==currentUser}">
+                                            <td>
+                                                <a th:href="@{/wall/{profile}(profile=${rejectedConnection.requestSender.profileName})}"
+                                                   th:text="${rejectedConnection.requestSender.profileName}">profile</a>
+                                            </td>
+                                            <!--td th:text="${rejectedConnection.requestSender.profileName}">profile name</td-->
+                                        </div>
+                                        <td th:text="${rejectedConnection.status}">status
+                                            <!--div th:if="${connection.requestSender.username==currentUser}">
+                                                <form
+                                                    method='POST'
+                                                    th:action="@{/connections/remove/{connectionToBeRemoved}(connectionToBeRemoved=${connection.requestReceiver.profileName})}">
+                                                    <input name="submit"
+                                                           type="submit"
+                                                           value="remove"
+                                                           style="width: 100px; background-color: lightcoral"
+                                                           onclick="return confirm('Are you sure you want to remove this connection?')"
+                                                           />
+                                                </form>
+                                            </div>
+
+                                            <div th:unless="${connection.requestSender.username==currentUser}">
+                                                <form
+                                                    method='POST'
+                                                    th:action="@{/connections/remove/{connectionToBeRemoved}(connectionToBeRemoved=${connection.requestSender.profileName})}">
+                                                    <input name="submit"
+                                                           type="submit"
+                                                           value="remove"
+                                                           style="width: 100px; background-color: lightcoral"
+                                                           onclick="return confirm('Are you sure you want to remove this connection?')"
+                                                           />
+                                                </form>
+                                            </div-->
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <!--Sent connection requests-->
+                    <div class="container" style="padding-top: 40px">
+                        <h1>Sent connection requests</h1>
+                        <div class="row col-md-7 table-responsive">
+                            <table id="sentConnectionRequests" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="sentConnectionRequest, rowStat: ${sentConnectionRequests}">
+
+                                        <td>
+                                            <a th:href="@{/wall/{profile}(profile=${sentConnectionRequest.requestReceiver.profileName})}"
+                                               th:text="${sentConnectionRequest.requestReceiver.profileName}">profile</a>
+                                        </td>
+
+
+                                        <!--td th:text="${sentConnectionRequest.requestReceiver.profileName}">profile name</td-->
+
+                                        <td>
+                                            <p th:text="${sentConnectionRequest.status}">connection status</p>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--Received connection requests-->
+                    <div class="container" style="padding-top: 40px">
+                        <h1>Received connection requests</h1>
+                        <div class="row col-md-7 table-responsive">
+                            <table id="receivedConnectionRequests" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="receivedConnectionRequest, rowStat: ${receivedConnectionRequests}">
+
+                                        <td>
+                                            <a th:href="@{/wall/{profile}(profile=${receivedConnectionRequest.requestSender.profileName})}"
+                                               th:text="${receivedConnectionRequest.requestSender.profileName}">profile</a>
+                                        </td>
+
+                                        <!--td th:text="${receivedConnectionRequest.requestSender.profileName}">profile name</td-->
+                                        <td>
+                                            <form
+                                                method='POST'
+                                                th:action="@{/connections/acceptConnectRequest/{requestSender}(requestSender=${receivedConnectionRequest.requestSender.profileName})}">
+                                                <input name="submit"
+                                                       type="submit"
+                                                       value="Accept"
+                                                       style="width: 100px; background-color: lightgreen"/>
+                                            </form>
+                                        </td>
+
+                                        <td>
+                                            <form
+                                                method='POST'
+                                                th:action="@{/connections/rejectConnectRequest/{requestSender}(requestSender=${receivedConnectionRequest.requestSender.profileName})}">
+                                                <input name="submit"
+                                                       type="submit"
+                                                       value="Reject"
+                                                       style="width: 100px; background-color: lightcoral"/>
+                                            </form>
+                                        </td>
+
+
+
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <!--List of people in Jobial that are not already in the above lists-->
+                    <div class="container" style="padding-top: 40px">
+                        <h1>People in Jobial</h1>
+                        <div class="row col-md-7 table-responsive">
+                            <table id="peopleTable" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="account, rowStat: ${accounts}">
+
+                                        <td>
+                                            <a th:href="@{/wall/{profile}(profile=${account.profileName})}"
+                                               th:text="${account.profileName}">profile</a>
+                                        </td>
+
+                                        <!--td th:text="${account.profileName}">profile</td-->
+                                        <td>
+                                            <form
+                                                method='POST'
+                                                th:action="@{/connections/sendConnectRequest/{connectTo}(connectTo=${account.profileName})}">
+                                                <input name="submit"
+                                                       type="submit"
+                                                       value="Connect"
+                                                       style="width: 100px"/>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </center>
+
+
+                </html>

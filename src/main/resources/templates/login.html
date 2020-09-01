@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
+
+                </head>
+                <center>
+                    <div class="container" style="padding-top:50px">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8" >
+                                <h1 style="padding-top: 10px">Welcome to</h1>
+                                <h1 style="padding-bottom: 40px">Jobial</h1>
+                                <!--p style="padding-top: 20px">Sign in to jobialize</p-->
+
+                                <div th:if="${param.error}"
+                                     class="alert alert-error"
+                                     style="color:red">
+                                    Invalid user name or password.
+                                </div>
+                                
+                                <div th:if="${param.logout}"
+                                     class="alert alert-succes">
+                                     You have been logged out.
+                                </div>
+
+                                <form name='f' th:action="@{/login}" method='POST'>
+                                    <table>
+                                        <tr>
+                                            <td><input type='text' name='username' placeholder="User name"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type='password' name='password' placeholder="Password"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 20px"><input name="submit" type="submit" value="Sign in" style="height: 30px; width: 182px"/></td>
+                                        </tr>
+                                    </table>
+                                </form>
+
+                                <div style="LINE-HEIGHT:10px; padding-bottom: 15px">
+                                    <p style="padding-top:20px">Not in Jobial yet?</p><a href="/signup">Sign up</a>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+                </center>
+</html>
+
