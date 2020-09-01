@@ -37,11 +37,11 @@ public class AccountController {
         return "signup";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("signup")
     public String add(@Valid @ModelAttribute Account account, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/signup";
+            return "signup";
         }
 
         if (accountRepository.findByUsername(account.getUsername()) != null) {
