@@ -22,7 +22,7 @@ public class ConnectionController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/connections")
+    @GetMapping("connections")
     public String connections(Model model) {
 
         String currentUser = accountService.getCurrentUserUsername();
@@ -69,10 +69,10 @@ public class ConnectionController {
         model.addAttribute("connections", connectedAccounts);
         model.addAttribute("rejectedConnections", rejectedAccounts);
 
-        return "/connections";
+        return "connections";
     }
 
-    @PostMapping("/connections/sendConnectRequest/{connectTo}")
+    @PostMapping("connections/sendConnectRequest/{connectTo}")
     public String sendConnectRequest(@PathVariable String connectTo) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
@@ -89,7 +89,7 @@ public class ConnectionController {
         return "redirect:/connections";
     }
 
-    @PostMapping("/connections/acceptConnectRequest/{requestSender}")
+    @PostMapping("connections/acceptConnectRequest/{requestSender}")
     public String acceptConnectRequest(@PathVariable String requestSender) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
@@ -102,7 +102,7 @@ public class ConnectionController {
         return "redirect:/connections";
     }
 
-    @PostMapping("/connections/rejectConnectRequest/{requestSender}")
+    @PostMapping("connections/rejectConnectRequest/{requestSender}")
     public String rejectConnectRequest(@PathVariable String requestSender) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
