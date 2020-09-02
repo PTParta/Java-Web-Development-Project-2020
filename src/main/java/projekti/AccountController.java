@@ -51,7 +51,7 @@ public class AccountController {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountRepository.save(account);
 
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/main")
