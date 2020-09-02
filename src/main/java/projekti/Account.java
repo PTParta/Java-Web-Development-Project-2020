@@ -37,9 +37,9 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany
     private List<Skill> skills = new ArrayList<>();
 
-    //@Lob
+    /*@Lob
     @Type(type="org.hibernate.type.ImageType")
-    private byte[] profilePicture;
+    private byte[] profilePicture;*/
 
     @ManyToMany
     private List<Skill> commendedSkills;

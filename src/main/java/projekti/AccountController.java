@@ -93,19 +93,19 @@ public class AccountController {
         return "wall";
     }
 
-    @GetMapping(path = "wall/{user}/picture", produces = "image/png")
+    /*@GetMapping(path = "wall/{user}/picture", produces = "image/png")
     @ResponseBody
     public byte[] getPicture(@PathVariable String user) {
         Account a = accountRepository.findByUsername(user);
 
         return a.getProfilePicture();
 
-    }
+    }*/
 
     @PostMapping("wall/{user}/remove_picture")
     public String removePicture(@PathVariable String user) {
         Account a = accountRepository.findByUsername(user);
-        a.setProfilePicture(null);
+        //a.setProfilePicture(null);
 
         accountRepository.save(a);
 
@@ -116,10 +116,10 @@ public class AccountController {
     public String addPicture(@RequestParam MultipartFile file, @PathVariable String user) throws IOException {
         Account a = accountRepository.findByUsername(user);
 
-        if (file.getBytes().length > 0) {
+        /*if (file.getBytes().length > 0) {
             a.setProfilePicture(file.getBytes());
             accountRepository.save(a);
-        }
+        }*/
         return "redirect:/wall/" + user;
     }
 
