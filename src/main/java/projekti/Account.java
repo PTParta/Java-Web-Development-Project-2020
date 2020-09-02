@@ -37,21 +37,20 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany
     private List<Skill> skills = new ArrayList<>();
 
-    /*@Lob
-    @Type(type="org.hibernate.type.ImageType")
-    private byte[] profilePicture;*/
+    //@Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] profilePicture;
 
     @ManyToMany
     private List<Skill> commendedSkills;
-    
-    @OneToMany
-    private List<Connection> connections = new ArrayList<>();
-    
-    /*
+
+    /*@OneToMany
+    private List<Connection> connections = new ArrayList<>();*/
+ /*
     private List<Account> receivedConnectionRequests = new ArrayList<>();
     
     private List<Account> sentConnectionRequests = new ArrayList<>();
     
     private List<Account> connected = new ArrayList<>();
-    */
+     */
 }
