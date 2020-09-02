@@ -54,19 +54,19 @@ public class AccountController {
         return "login";
     }
 
-    @GetMapping("/main")
+    @GetMapping("main")
     public String main(Model model) {
 
-        return "/main";
+        return "main";
     }
 
-    @GetMapping("/wall")
+    @GetMapping("wall")
     public String wall(Model model, @ModelAttribute Account account) {
 
-        return "/wall";
+        return "wall";
     }
 
-    @GetMapping("/wall/{user}")
+    @GetMapping("wall/{user}")
     public String getUser(Model model, @PathVariable String user) {
 
         Account a = accountRepository.findByUsername(user);
@@ -93,7 +93,7 @@ public class AccountController {
         return "wall";
     }
 
-    @GetMapping(path = "/wall/{user}/picture", produces = "image/png")
+    @GetMapping(path = "wall/{user}/picture", produces = "image/png")
     @ResponseBody
     public byte[] getPicture(@PathVariable String user) {
         Account a = accountRepository.findByUsername(user);
@@ -102,7 +102,7 @@ public class AccountController {
 
     }
 
-    @PostMapping("/wall/{user}/remove_picture")
+    @PostMapping("wall/{user}/remove_picture")
     public String removePicture(@PathVariable String user) {
         Account a = accountRepository.findByUsername(user);
         a.setProfilePicture(null);
@@ -112,7 +112,7 @@ public class AccountController {
         return "redirect:/wall/" + user;
     }
 
-    @PostMapping("/wall/{user}/add_picture")
+    @PostMapping("wall/{user}/add_picture")
     public String addPicture(@RequestParam MultipartFile file, @PathVariable String user) throws IOException {
         Account a = accountRepository.findByUsername(user);
 
@@ -123,12 +123,12 @@ public class AccountController {
         return "redirect:/wall/" + user;
     }
 
-    @GetMapping("/wall/{user}/add_picture")
+    @GetMapping("wall/{user}/add_picture")
     public String Picture(@PathVariable String user, Model model) {
 
         model.addAttribute("account", this.accountRepository.findByUsername(user));
 
-        return "/add_picture";
+        return "add_picture";
     }
 
 
