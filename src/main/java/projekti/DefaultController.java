@@ -11,7 +11,7 @@ public class DefaultController {
     @GetMapping("*")
     public String helloWorld(Model model) {
         //model.addAttribute("message", "World!");
-        return "/main";
+        return "main";
     }
 
     

@@ -21,7 +21,7 @@ public class SkillController {
     @Autowired
     SkillService skillService;
 
-    @PostMapping("/wall/{user}/skill")
+    @PostMapping("wall/{user}/skill")
     public String addSkill(@PathVariable String user, @RequestParam String skillName, RedirectAttributes redirectAttributes) {
 
         if (skillName.isEmpty()) {
@@ -36,7 +36,7 @@ public class SkillController {
         return "redirect:/wall/" + user;
     }
 
-    @PostMapping("/wall/{user}/commend/{skill}")
+    @PostMapping("wall/{user}/commend/{skill}")
     public String commend(@PathVariable String user, @PathVariable String skill) {
 
         skillService.commend(user, skill);
