@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ConnectionController {
@@ -135,6 +136,19 @@ public class ConnectionController {
             connectionRepository.delete(connectionRepository.findByRequestSenderAndRequestReceiver(removeConnectionToAccount, currentUserAccount));
         }
 
+        return "redirect:/connections";
+    }
+
+    @PostMapping("/connections/find")
+    public String findPeople(@RequestParam String name) {
+        List<Account> accountsThatContainName = new ArrayList<>();
+        List<Account> allAccounts = accountRepository.findAll();
+
+        for (Account a : allAccounts) {
+            if (a.getName().contains(name)) {
+                accountsThatContainName.add(a);
+            }
+        }
         return "redirect:/connections";
     }
 }

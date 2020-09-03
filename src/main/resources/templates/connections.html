@@ -23,9 +23,9 @@
                     </button-->
                     <!--div class="collapse navbar-collapse" id="collapsibleNavbar"-->
                     <ul class="navbar-nav mr_auto">
-                        <!--li class="nav-item">
-                            <a class="nav-link" th:href="@{/wall/{user}(user=${account.profileName})}">Wall</a>
-                        </li-->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/wall}">Wall</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/connections}">Connections</a>
                         </li>
@@ -46,9 +46,35 @@
 
                 <center>
 
+                    <!--Find people-->
+                    <h3>Search people by their name</h3>
+
+                    <form name='f' th:action="@{/connections/find}" method='POST'>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type='text'
+                                           name='name'
+                                           placeholder="">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding-top: 20px">
+                                    <input name="submit"
+                                           type="submit"
+                                           value="Search"
+                                           style="height: 30px;
+                                           width: 182px"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+
                     <!--Connections-->
                     <div class="container" style="padding-top: 40px">
-                        <h1>Connections</h1>
+                        <h3>Connections</h3>
                         <div class="row col-md-7 table-responsive">
                             <table id="Connections" class="table">
                                 <thead>
@@ -62,14 +88,14 @@
                                         <div th:if="${connection.requestSender.username==currentUser}">
                                             <td>
                                                 <a th:href="@{/wall/{profile}(profile=${connection.requestReceiver.profileName})}"
-                                                   th:text="${connection.requestReceiver.profileName}">profile name>profile</a>
+                                                   th:text="${connection.requestReceiver.name}">profile</a>
                                             </td>
                                             <!--td th:text="${connection.requestReceiver.profileName}">profile name</td-->
                                         </div>
                                         <div th:unless="${connection.requestSender.username==currentUser}">
                                             <td>
                                                 <a th:href="@{/wall/{profile}(profile=${connection.requestSender.profileName})}"
-                                                   th:text="${connection.requestSender.profileName}">profile</a>
+                                                   th:text="${connection.requestSender.name}">profile</a>
                                             </td>
                                             <!--td th:text="${connection.requestSender.profileName}">profile name</td-->
                                         </div>
@@ -109,7 +135,7 @@
 
                     <!--Rejected accounts-->
                     <div class="container" style="padding-top: 40px">
-                        <h1>Rejected connection requests</h1>
+                        <h3>Rejected connection requests</h3>
                         <div class="row col-md-7 table-responsive">
                             <table id="rejectedConnectionRequests" class="table">
                                 <thead>
@@ -123,14 +149,14 @@
                                         <div th:if="${rejectedConnection.requestSender.username==currentUser}">
                                             <td>
                                                 <a th:href="@{/wall/{profile}(profile=${rejectedConnection.requestReceiver.profileName})}"
-                                                   th:text="${rejectedConnection.requestReceiver.profileName}">profile</a>
+                                                   th:text="${rejectedConnection.requestReceiver.name}">profile</a>
                                             </td>
                                             <!--td th:text="${rejectedConnection.requestReceiver.profileName}">profile name</td-->
                                         </div>
                                         <div th:unless="${rejectedConnection.requestSender.username==currentUser}">
                                             <td>
                                                 <a th:href="@{/wall/{profile}(profile=${rejectedConnection.requestSender.profileName})}"
-                                                   th:text="${rejectedConnection.requestSender.profileName}">profile</a>
+                                                   th:text="${rejectedConnection.requestSender.name}">profile</a>
                                             </td>
                                             <!--td th:text="${rejectedConnection.requestSender.profileName}">profile name</td-->
                                         </div>
@@ -172,7 +198,7 @@
 
                     <!--Sent connection requests-->
                     <div class="container" style="padding-top: 40px">
-                        <h1>Sent connection requests</h1>
+                        <h3>Sent connection requests</h3>
                         <div class="row col-md-7 table-responsive">
                             <table id="sentConnectionRequests" class="table">
                                 <thead>
@@ -186,7 +212,7 @@
 
                                         <td>
                                             <a th:href="@{/wall/{profile}(profile=${sentConnectionRequest.requestReceiver.profileName})}"
-                                               th:text="${sentConnectionRequest.requestReceiver.profileName}">profile</a>
+                                               th:text="${sentConnectionRequest.requestReceiver.name}">profile</a>
                                         </td>
 
 
@@ -204,7 +230,7 @@
 
                     <!--Received connection requests-->
                     <div class="container" style="padding-top: 40px">
-                        <h1>Received connection requests</h1>
+                        <h3>Received connection requests</h3>
                         <div class="row col-md-7 table-responsive">
                             <table id="receivedConnectionRequests" class="table">
                                 <thead>
@@ -219,7 +245,7 @@
 
                                         <td>
                                             <a th:href="@{/wall/{profile}(profile=${receivedConnectionRequest.requestSender.profileName})}"
-                                               th:text="${receivedConnectionRequest.requestSender.profileName}">profile</a>
+                                               th:text="${receivedConnectionRequest.requestSender.name}">profile</a>
                                         </td>
 
                                         <!--td th:text="${receivedConnectionRequest.requestSender.profileName}">profile name</td-->
@@ -258,7 +284,7 @@
 
                     <!--List of people in Jobial that are not already in the above lists-->
                     <div class="container" style="padding-top: 40px">
-                        <h1>People in Jobial</h1>
+                        <h3>People in Jobial</h3>
                         <div class="row col-md-7 table-responsive">
                             <table id="peopleTable" class="table">
                                 <thead>
@@ -272,7 +298,7 @@
 
                                         <td>
                                             <a th:href="@{/wall/{profile}(profile=${account.profileName})}"
-                                               th:text="${account.profileName}">profile</a>
+                                               th:text="${account.name}">profile</a>
                                         </td>
 
                                         <!--td th:text="${account.profileName}">profile</td-->
