@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
+        <title th:text="${account.name}">User name</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
         <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
-                <title>TODO supply a title</title>
+
                 </head>
 
-                <body>
-                    <div>TODO write content</div>
-                    <div>
-                        <form method="post" action="#" th:action="@{/logout}"><input type="submit" name="logout" value="Logout"/></form>
-                    </div>
-                </body>
+                <div th:replace="fragments/navigation :: navigation"></div>
+
                 </html>

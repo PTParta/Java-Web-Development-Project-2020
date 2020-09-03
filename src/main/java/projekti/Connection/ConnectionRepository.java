@@ -1,5 +1,6 @@
-package projekti;
+package projekti.Connection;
 
+import projekti.Account.Account;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

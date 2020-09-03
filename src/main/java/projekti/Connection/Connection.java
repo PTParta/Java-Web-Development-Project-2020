@@ -1,5 +1,6 @@
-package projekti;
+package projekti.Connection;
 
+import projekti.Account.Account;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;

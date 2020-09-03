@@ -1,5 +1,7 @@
-package projekti;
+package projekti.Skill;
 
+import projekti.Account.Account;
+import projekti.Account.AccountRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,8 @@ public class SkillController {
         if (skillName.isEmpty()) {
             return "redirect:/wall/" + user;
         }
-        Account a = accountRepository.findByUsername(user);
+        //Account a = accountRepository.findByUsername(user);
+        Account a = accountRepository.findByProfileName(user);
 
         if (skillService.skillExists(a, skillName, redirectAttributes)) {
             return "redirect:/wall/" + user;

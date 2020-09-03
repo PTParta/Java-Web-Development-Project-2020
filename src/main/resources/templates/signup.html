@@ -8,6 +8,21 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
 
                 </head>
+
+                <div class="jumbotron text-center" style="margin-bottom:0">
+                    <h1>Jobial</h1>
+                    <p>Job + Social</p> 
+                </div>
+
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">
+                    <ul class="navbar-nav mr_auto"
+                        style="min-height: 40px">
+                        <li class="nav-item">
+                            <p> </p>
+                        </li>
+                    </ul>
+                </nav>
+
                 <center>
                     <div class="container" style="padding-top:50px">
                         <div class="row">
@@ -32,6 +47,11 @@
                                                     th:errors="*{username}"
                                                     style="color:red">username error message</td>
                                             </tr>
+                                            <tr>
+                                                <div th:if="${errorMessageUsername}" style='color:red'>
+                                                    <div th:text="${errorMessageUsername}"></div>
+                                                </div>
+                                            </tr>
                                         </tr>
                                         <tr>
                                             <td><input type="text"
@@ -44,6 +64,11 @@
                                                 <td th:if="${#fields.hasErrors('profileName')}"
                                                     th:errors="*{profileName}"
                                                     style="color:red">profile name error message</td>
+                                            </tr>
+                                            <tr>
+                                                <div th:if="${errorMessageProfileName}" style='color:red'>
+                                                    <div th:text="${errorMessageProfileName}"></div>
+                                                </div>
                                             </tr>
                                         </tr>
                                         <tr>

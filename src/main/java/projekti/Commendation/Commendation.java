@@ -1,6 +1,8 @@
 
-package projekti;
+package projekti.Commendation;
 
+import projekti.Skill.Skill;
+import projekti.Account.Account;
 import java.util.ArrayList;
 import java.util.List;
 

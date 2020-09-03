@@ -1,3 +1,5 @@
+package projekti.Security;
+
 /*package projekti;
 
 import org.springframework.context.annotation.Configuration;

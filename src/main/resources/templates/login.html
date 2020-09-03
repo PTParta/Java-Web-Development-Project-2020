@@ -8,6 +8,21 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
 
                 </head>
+
+                <div class="jumbotron text-center" style="margin-bottom:0">
+                    <h1>Jobial</h1>
+                    <p>Job + Social</p> 
+                </div>
+
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">
+                    <ul class="navbar-nav mr_auto"
+                        style="min-height: 40px">
+                        <li class="nav-item">
+                            <p> </p>
+                        </li>
+                    </ul>
+                </nav>
+
                 <center>
                     <div class="container" style="padding-top:50px">
                         <div class="row">
@@ -22,10 +37,10 @@
                                      style="color:red">
                                     Invalid user name or password.
                                 </div>
-                                
+
                                 <div th:if="${param.logout}"
                                      class="alert alert-succes">
-                                     You have been logged out.
+                                    You have been logged out.
                                 </div>
 
                                 <form name='f' th:action="@{/login}" method='POST'>
@@ -50,5 +65,5 @@
                         </div>
                     </div>
                 </center>
-</html>
+                </html>
 

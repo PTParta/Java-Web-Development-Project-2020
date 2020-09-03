@@ -1,4 +1,4 @@
-package projekti;
+package projekti.Account;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import projekti.Skill.Skill;
 
 @Service
 public class AccountService {
@@ -20,6 +21,9 @@ public class AccountService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
+        System.out.println("");
+        System.out.println(currentPrincipalName);
+        System.out.println("");
         return currentPrincipalName;
     }
 

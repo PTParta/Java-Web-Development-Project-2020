@@ -1,5 +1,7 @@
-package projekti;
+package projekti.Connection;
 
+import projekti.Account.AccountService;
+import projekti.Account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

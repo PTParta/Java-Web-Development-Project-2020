@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:text="${account.name}">User name</title>
+        <title th:text="${account.profileName}">profile name</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
         <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
 
                 </head>
+    
+    <div th:replace="fragments/navigation :: navigation"></div>
+    
                 <body>
                     <center>
                         <div class="container" style="padding-top: 50px">
@@ -20,9 +23,9 @@
 
                                 <!--Profile picture-->
                                 <span th:if="${account.profilePicture != null}">
-                                    <img th:src="@{/wall/{user}/picture(user=${account.username})}"
+                                    <img th:src="@{/wall/{user}/picture(user=${account.profileName})}"
                                          width="200" height="200"/>
-                                    <form th:action="@{/wall/{user}/remove_picture (user=${account.username})}"
+                                    <form th:action="@{/wall/{user}/remove_picture (user=${account.profileName})}"
                                           method="POST"
                                           style='padding-bottom: 60px; padding-top: 20px'>
                                         <input th:if='${userSameAsBrowsed==true}'
@@ -36,14 +39,14 @@
                                 <!--Add profile picture-->
                                 <div th:if='${userSameAsBrowsed==true}'>
                                     <span th:if="${account.profilePicture == null}">
-                                        <a th:href="@{/wall/{user}/add_picture(user=${account.username})}" style="padding-bottom: 40px">Add a profile picture</a>
+                                        <a th:href="@{/wall/{user}/add_picture(user=${account.profileName})}" style="padding-bottom: 40px">Add a profile picture</a>
                                     </span>
                                 </div>
 
                                 <!--Add a skill-->
                                 <div th:if='${userSameAsBrowsed==true}'>
                                     <h3 style='padding-top: 60px'>Add a skill</h3>
-                                    <form method='POST' th:action="@{/wall/{user}/skill(user=${account.username})}">
+                                    <form method='POST' th:action="@{/wall/{user}/skill(user=${account.profileName})}">
                                         <table>
                                             <tr>
                                                 <td><input type='skill'
@@ -104,7 +107,7 @@
                                                     <div th:unless="${#lists.contains(skill.accountsThatCommended, currentUserAccount)}">    
                                                         <form th:if='${userSameAsBrowsed==false}'
                                                               method='POST'
-                                                              th:action="@{/wall/{user}/commend/{skill}(user=${account.username}, skill=${skill.skillName})}">
+                                                              th:action="@{/wall/{user}/commend/{skill}(user=${account.profileName}, skill=${skill.skillName})}">
                                                             <input name="submit"
                                                                    type="submit"
                                                                    value="Commend"
@@ -148,7 +151,7 @@
 
                                                         <form th:if='${userSameAsBrowsed==false}'
                                                               method='POST'
-                                                              th:action="@{/wall/{user}/commend/{skill}(user=${account.username}, skill=${skill.skillName})}">
+                                                              th:action="@{/wall/{user}/commend/{skill}(user=${account.profileName}, skill=${skill.skillName})}">
                                                             <input name="submit"
                                                                    type="submit"
                                                                    value="Commend"
@@ -188,7 +191,7 @@
                                                     <div th:unless="${#lists.contains(skill.accountsThatCommended, currentUserAccount)}">
                                                         <form th:if='${userSameAsBrowsed==false}'
                                                               method='POST'
-                                                              th:action="@{/wall/{user}/commend/{skill}(user=${account.username}, skill=${skill.skillName})}">
+                                                              th:action="@{/wall/{user}/commend/{skill}(user=${account.profileName}, skill=${skill.skillName})}">
                                                             <input name="submit"
                                                                    type="submit"
                                                                    value="Commend"

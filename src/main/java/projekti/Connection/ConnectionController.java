@@ -1,5 +1,8 @@
-package projekti;
+package projekti.Connection;
 
+import projekti.Account.AccountService;
+import projekti.Account.Account;
+import projekti.Account.AccountRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.websocket.server.PathParam;
@@ -46,7 +49,6 @@ public class ConnectionController {
         rejectedAccounts.addAll(rejectedAccountsSent);
         rejectedAccounts.addAll(rejectedAccountsReceived);
 
-        
         /*Remove accounts that have a connection object from "accounts" model
         so there wouldn´t be a duplicate listing of an account.*/
         List<Account> accountsToBeRemoved = new ArrayList<>();
@@ -76,7 +78,8 @@ public class ConnectionController {
     public String sendConnectRequest(@PathVariable String connectTo) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        Account connectToAccount = accountRepository.findByUsername(connectTo);
+        //Account connectToAccount = accountRepository.findByUsername(connectTo);
+        Account connectToAccount = accountRepository.findByProfileName(connectTo);
 
         if (connectionRepository.findByRequestSenderAndRequestReceiver(currentUserAccount, connectToAccount) == null) {
             Connection connection = new Connection();
@@ -93,7 +96,8 @@ public class ConnectionController {
     public String acceptConnectRequest(@PathVariable String requestSender) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        Account connectToAccount = accountRepository.findByUsername(requestSender);
+        //Account connectToAccount = accountRepository.findByUsername(requestSender);
+        Account connectToAccount = accountRepository.findByProfileName(requestSender);
 
         Connection connection = connectionRepository.findByRequestSenderAndRequestReceiver(connectToAccount, currentUserAccount);
         connection.setStatus("connected");
@@ -106,7 +110,8 @@ public class ConnectionController {
     public String rejectConnectRequest(@PathVariable String requestSender) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        Account connectToAccount = accountRepository.findByUsername(requestSender);
+        //Account connectToAccount = accountRepository.findByUsername(requestSender);
+        Account connectToAccount = accountRepository.findByProfileName(requestSender);
 
         Connection connection = connectionRepository.findByRequestSenderAndRequestReceiver(connectToAccount, currentUserAccount);
         connection.setStatus("rejected");
@@ -120,7 +125,8 @@ public class ConnectionController {
 
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        Account removeConnectionToAccount = accountRepository.findByUsername(connectionToBeRemoved);
+        //Account removeConnectionToAccount = accountRepository.findByUsername(connectionToBeRemoved);
+        Account removeConnectionToAccount = accountRepository.findByProfileName(connectionToBeRemoved);
 
         if (connectionRepository.findByRequestSenderAndRequestReceiver(currentUserAccount, removeConnectionToAccount) != null) {
             connectionRepository.delete(connectionRepository.findByRequestSenderAndRequestReceiver(currentUserAccount, removeConnectionToAccount));

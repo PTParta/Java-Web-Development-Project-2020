@@ -9,7 +9,7 @@
                 </head>
     
                 <center style="padding-top: 50px">
-                    <form th:action="@{/wall/{user}/add_picture(user=${account.username})}" method="POST" enctype="multipart/form-data">
+                    <form th:action="@{/wall/{user}/add_picture(user=${account.profileName})}" method="POST" enctype="multipart/form-data">
                         <input type="file" name="file" />
                         <input type="submit" value="Add"/>
                     </form>

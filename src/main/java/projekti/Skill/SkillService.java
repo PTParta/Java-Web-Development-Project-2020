@@ -1,5 +1,7 @@
-package projekti;
+package projekti.Skill;
 
+import projekti.Account.Account;
+import projekti.Account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -60,7 +62,8 @@ public class SkillService {
      * @param skill
      */
     public void commend(String user, String skill) {
-        Account a = accountRepository.findByUsername(user);
+        //Account a = accountRepository.findByUsername(user);
+        Account a = accountRepository.findByProfileName(user);
         Skill s = skillRepository.findByAccountAndSkillName(a, skill);
         s.setCommendAmount(s.getCommendAmount() + 1);
         
