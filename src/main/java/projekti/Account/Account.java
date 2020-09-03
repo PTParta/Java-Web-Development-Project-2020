@@ -43,8 +43,8 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany
     private List<Skill> skills = new ArrayList<>();
 
-    @Lob
-    //@Type(type = "org.hibernate.type.BinaryType")
+    //@Lob
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] profilePicture;
 
     @ManyToMany
