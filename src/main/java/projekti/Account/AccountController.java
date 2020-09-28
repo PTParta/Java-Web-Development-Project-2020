@@ -69,7 +69,7 @@ public class AccountController {
             String error1 = "User name " + account.getUsername() + " is already taken.";
             redirectAttributes.addFlashAttribute("errorMessageUsername", error1);
 
-            String error2 = "Profile name " + account.getProfileName()+ " is already taken.";
+            String error2 = "Profile name " + account.getProfileName() + " is already taken.";
             redirectAttributes.addFlashAttribute("errorMessageProfileName", error2);
         }
 
@@ -81,13 +81,11 @@ public class AccountController {
         }
 
         if (accountRepository.findByProfileName(account.getProfileName()) != null) {
-            String error = "Profile name " + account.getProfileName()+ " is already taken.";
+            String error = "Profile name " + account.getProfileName() + " is already taken.";
             redirectAttributes.addFlashAttribute("errorMessageProfileName", error);
 
             return "redirect:/signup";
         }
-        
-        
 
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountRepository.save(account);

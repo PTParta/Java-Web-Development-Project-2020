@@ -3,14 +3,19 @@ package projekti.Account;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import projekti.Skill.Skill;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class AccountService {
+
+    @Autowired
+    AccountRepository accountRepository;
 
     /**
      * Get the current user´s username who is browsing the website
@@ -21,9 +26,6 @@ public class AccountService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-        System.out.println("");
-        System.out.println(currentPrincipalName);
-        System.out.println("");
         return currentPrincipalName;
     }
 
@@ -44,7 +46,6 @@ public class AccountService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
          */
-        
         //Check if the user is the same as the person whose wall he is looking at
         boolean userSameAsBrowsed;
 
@@ -84,4 +85,37 @@ public class AccountService {
             model.addAttribute("skillsNotTopThree", skillsNotTopThree);
         }
     }
+
+    /**
+     * During sign up checks if the User name and Profile name are available.
+     * Returns true if they are. Return false if they aren´t and redirects to
+     * the sign up page with error messages.
+     *
+     * @param account
+     * @return boolean
+     */
+    /*public boolean checkAccount(Account account, RedirectAttributes redirectAttributes) {
+        if (accountRepository.findByUsername(account.getUsername()) != null
+                && accountRepository.findByProfileName(account.getProfileName()) != null) {
+            String error1 = "User name " + account.getUsername() + " is already taken.";
+            redirectAttributes.addFlashAttribute("errorMessageUsername", error1);
+
+            String error2 = "Profile name " + account.getProfileName() + " is already taken.";
+            redirectAttributes.addFlashAttribute("errorMessageProfileName", error2);
+        }
+
+        if (accountRepository.findByUsername(account.getUsername()) != null) {
+            String error = "User name " + account.getUsername() + " is already taken.";
+            redirectAttributes.addFlashAttribute("errorMessageUsername", error);
+
+            return "redirect:/signup";
+        }
+
+        if (accountRepository.findByProfileName(account.getProfileName()) != null) {
+            String error = "Profile name " + account.getProfileName() + " is already taken.";
+            redirectAttributes.addFlashAttribute("errorMessageProfileName", error);
+
+            return "redirect:/signup";
+        }
+    }*/
 }
