@@ -42,23 +42,31 @@
 
                         <a th:href="@{/wall/{profile}(profile=${post.postAccount.profileName})}"
                            th:text="${post.postAccount.name}">name</a>
-                        <!--p th:text="${post.postAccount.profileName}">name</p-->
                         <p th:text="${#temporals.format(post.postTime, 'dd-MM-yyyy HH:mm:ss')}">time</p>
                         <p th:text="${post.postMessage}">name</p>
                         <p th:text="'Likes: ' + ${post.postLikesAmount}">likes</p>
 
                         <div th:if="${currentUserAccount.profileName!=post.postAccount.profileName}"-->
-                            <form 
-                                th:action="@{/feed/like/{postAccountProfileName}/{postTimeString}(postAccountProfileName=${post.postAccount.profileName}, postTimeString=${post.postTimeString})}"
-                                method='POST'>
-                                <input name="like"
-                                       type="submit"
-                                       value="Like"
-                                       style="height: 30px;
-                                       width: 182px"/>
-                            </form>
+                            <div th:if="not ${#lists.contains(post.postAccountsThatLiked, currentUserAccount)}">
+                                <form 
+                                    th:action="@{/feed/like/{postAccountProfileName}/{postTimeString}(postAccountProfileName=${post.postAccount.profileName}, postTimeString=${post.postTimeString})}"
+                                    method='POST'>
+                                    <input name="like"
+                                           type="submit"
+                                           value="Like"
+                                           style="height: 30px;
+                                           width: 182px"/>
+                                </form>
+                            </div>
+                            <div th:unless="not ${#lists.contains(post.postAccountsThatLiked, currentUserAccount)}">
+                                <p>You liked this post</p>
+                            </div>
                         </div>
-                        <form style='padding-top: 20px'name='f' th:action="@{/feed/post/commentPost/{post}}" method='POST'>
+                        <form style='padding-top: 20px'
+                              name='f'
+                              th:action="@{/feed/commentPost}"
+                              th:object="${post}"
+                              method='POST'>
                             <textarea name="commentPost" rows="1" cols="50">
 
                             </textarea>

@@ -29,9 +29,6 @@ public class PostService {
     AccountService accountService;
 
     @Autowired
-    ConnectionRepository connectionRepository;
-
-    @Autowired
     ConnectionService connectionSerivce;
 
     public List<Post> postsFromConnectionsAndSelf() {
@@ -82,6 +79,8 @@ public class PostService {
             model.addAttribute("posts", postsShortened);
         }
         model.addAttribute("currentUserAccount", currentUserAccount);
+        
+        
     }
 
     public void post(String message) {

@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import projekti.Comment.Comment;
 
 @Entity
 @Data
@@ -36,5 +37,6 @@ public class Post extends AbstractPersistable<Long> {
     @ManyToMany
     private List<Account> postAccountsThatLiked = new ArrayList<>();
 
-    //private List<Post> postComment = new ArrayList<>();
+    @OneToMany
+    private List<Comment> postComments = new ArrayList<>();
 }

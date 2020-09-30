@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import projekti.Comment.Comment;
 import projekti.Post.Post;
 import projekti.Skill.Skill;
 
@@ -57,6 +58,9 @@ public class Account extends AbstractPersistable<Long> {
 
     @ManyToMany(mappedBy="postAccountsThatLiked")
     private List<Post> likedPosts = new ArrayList<>();
+    
+    @OneToMany
+    private List<Comment> comments;
 
     /*@OneToMany
     private List<Connection> connections = new ArrayList<>();*/
