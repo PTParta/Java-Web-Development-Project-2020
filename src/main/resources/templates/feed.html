@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Feed</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/meta>
+                </head>
+
+                <div th:replace="fragments/navigation :: navigation"></div>
+
+                <center>
+                    <!--Write a post-->
+                    <h3 style="padding-top: 40px; padding-bottom: 20px">Write your message here</h3>
+
+                    <form name='f' th:action="@{/feed/post}" method='POST'>
+                        <table>
+                            <tr>
+                                <td>
+                                    <textarea name="message" rows="4" cols="50">
+
+                                    </textarea>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding-top: 20px">
+                                    <input name="post"
+                                           type="submit"
+                                           value="Post"
+                                           style="height: 30px;
+                                           width: 375px"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    <!--Posts-->
+                    <h3 style="padding-top: 20px">Posts</h3>                   
+                    <div style="padding-top: 40px" th:each="post, rowStat: ${posts}">
+
+                        <a th:href="@{/wall/{profile}(profile=${post.postAccount.profileName})}"
+                           th:text="${post.postAccount.name}">name</a>
+                        <!--p th:text="${post.postAccount.profileName}">name</p-->
+                        <p th:text="${#temporals.format(post.postTime, 'dd-MM-yyyy HH:mm:ss')}">time</p>
+                        <p th:text="${post.postMessage}">name</p>
+                        <p th:text="'Likes: ' + ${post.postLikesAmount}">likes</p>
+
+                        <div th:if="${currentUserAccount.profileName!=post.postAccount.profileName}"-->
+                            <form 
+                                th:action="@{/feed/like/{postAccountProfileName}/{postTimeString}(postAccountProfileName=${post.postAccount.profileName}, postTimeString=${post.postTimeString})}"
+                                method='POST'>
+                                <input name="like"
+                                       type="submit"
+                                       value="Like"
+                                       style="height: 30px;
+                                       width: 182px"/>
+                            </form>
+                        </div>
+                        <form style='padding-top: 20px'name='f' th:action="@{/feed/post/commentPost/{post}}" method='POST'>
+                            <textarea name="commentPost" rows="1" cols="50">
+
+                            </textarea>
+                            <br>
+                                <input 
+                                    name="comment"
+                                    type="submit"
+                                    value="Comment"
+                                    style="height: 30px;
+                                    width: 182px"/>
+                        </form>
+                        <br>
+                    </div>
+
+                </center>
+
+
+                </html>

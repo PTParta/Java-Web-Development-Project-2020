@@ -17,15 +17,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import projekti.Post.Post;
 import projekti.Skill.Skill;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"username" , "profileName"})})
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"username", "profileName"})})
 public class Account extends AbstractPersistable<Long> {
-    
+
     //@Column(unique=true)
     @Size(min = 3, max = 20)
     private String username;
@@ -48,7 +50,13 @@ public class Account extends AbstractPersistable<Long> {
     private byte[] profilePicture;
 
     @ManyToMany
-    private List<Skill> commendedSkills;
+    private List<Skill> commendedSkills = new ArrayList<>();
+
+    @OneToMany
+    private List<Post> posts;
+
+    @ManyToMany(mappedBy="postAccountsThatLiked")
+    private List<Post> likedPosts = new ArrayList<>();
 
     /*@OneToMany
     private List<Connection> connections = new ArrayList<>();*/
