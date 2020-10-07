@@ -18,9 +18,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <textarea name="message" rows="4" cols="50">
-
-                                    </textarea>
+                                    <textarea name="message" rows="4" cols="50"></textarea>
                                 </td>
                             </tr>
 
@@ -37,15 +35,16 @@
                     </form>
 
                     <!--Posts-->
-                    <h3 style="padding-top: 20px">Posts</h3>                   
+                    <!--h3 style="padding-top: 20px">Posts</h3-->                   
                     <div style="padding-top: 40px" th:each="post, rowStat: ${posts}">
-
+                        <h3>Post</h3>
                         <a th:href="@{/wall/{profile}(profile=${post.postAccount.profileName})}"
                            th:text="${post.postAccount.name}">name</a>
                         <p th:text="${#temporals.format(post.postTime, 'dd-MM-yyyy HH:mm:ss')}">time</p>
                         <p th:text="${post.postMessage}">name</p>
                         <p th:text="'Likes: ' + ${post.postLikesAmount}">likes</p>
 
+                        <!--Like post-->
                         <div th:if="${currentUserAccount.profileName!=post.postAccount.profileName}"-->
                             <div th:if="not ${#lists.contains(post.postAccountsThatLiked, currentUserAccount)}">
                                 <form 
@@ -62,17 +61,44 @@
                                 <p>You liked this post</p>
                             </div>
                         </div>
+
+                        <!--Comments-->
+                        <!--th:each="postComment, rowStat: ${#lists.sort(post.postComments, byDate)}"-->
+                        <h4 style="padding-top: 20px">Comments</h4>
+                        <!--Insert here a commentService model. Then call the model´s 
+                        function to sort and show 10 newest comments-->
+                        <!--div th:if="${commentService.sortAndShow10Comments(post.postAccount.profileName, post.postTimeString)}"-->
+                        <div th:each="comment, rowStat: ${comments}"
+                             th:if="${comment.post==post}">
+                            <a th:href="@{/wall/{profile}(profile=${comment.commentAccount.profileName})}"
+                               th:text="${comment.commentAccount.name}">name</a>
+                            <p th:text="${#temporals.format(comment.commentTime, 'dd-MM-yyyy HH:mm:ss')}">time</p>
+                            <p th:text="${comment.commentMessage}">comment message</p>
+                            <!--/div-->
+
+
+                        </div>
+                        <!--div style="padding-top: 10px"
+
+                             th:each="postComment, rowStat: ${post.postComments}"
+                             th:unless="${rowStat.index > 9}">
+                            <a th:href="@{/wall/{profile}(profile=${postComment.commentAccount.profileName})}"
+                               th:text="${postComment.commentAccount.name}">name</a>
+                            <p th:text="${#temporals.format(postComment.commentTime, 'dd-MM-yyyy HH:mm:ss')}">time</p>
+                            <p th:text="${postComment.commentMessage}">comment message</p>
+
+                        </div-->
+
+
                         <form style='padding-top: 20px'
                               name='f'
-                              th:action="@{/feed/commentPost}"
+                              th:action="@{/feed/commentPost/{postAccountProfileName}/{postTimeString}(postAccountProfileName=${post.postAccount.profileName}, postTimeString=${post.postTimeString})}"
                               th:object="${post}"
                               method='POST'>
-                            <textarea name="commentPost" rows="1" cols="50">
-
-                            </textarea>
+                            <textarea name="comment" rows="1" cols="50"></textarea>
                             <br>
                                 <input 
-                                    name="comment"
+                                    name="postComment"
                                     type="submit"
                                     value="Comment"
                                     style="height: 30px;

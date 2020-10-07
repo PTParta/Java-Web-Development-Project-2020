@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import projekti.Account.Account;
 import projekti.Account.AccountRepository;
 import projekti.Account.AccountService;
+import projekti.Comment.Comment;
+import projekti.Comment.CommentService;
 import projekti.Connection.ConnectionRepository;
 import projekti.Connection.ConnectionService;
 
@@ -30,6 +32,9 @@ public class PostService {
 
     @Autowired
     ConnectionService connectionSerivce;
+
+    @Autowired
+    CommentService commentService;
 
     public List<Post> postsFromConnectionsAndSelf() {
 
@@ -54,10 +59,12 @@ public class PostService {
     /**
      * Sorts posts on date, newest first. Shows 25 posts max.
      *
+     * This method is propably not necessary since the same type of sorting and
+     * limiting could have been done with a Pageable Object.
+     *
      * @param model
-     * @param account
      */
-    public void sortAndShowMax25Posts(Model model, @ModelAttribute Account account) {
+    public void sortAndShowMax25Posts(Model model) {
 
         String currentUserUsername = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUserUsername);
@@ -68,19 +75,24 @@ public class PostService {
         Comparator<Post> compareByDateTime = (Post p1, Post p2) -> p1.getPostTime().compareTo(p2.getPostTime());
         Collections.sort(posts, compareByDateTime.reversed());
 
+        List<Comment> comments = new ArrayList<>();
+        
         //Show max 25 newest posts
         if (posts.size() <= 25) {
             model.addAttribute("posts", posts);
+            comments = commentService.sortAndGet10Comments(posts);
+
         } else {
             List<Post> postsShortened = new ArrayList<>();
             for (int i = 0; i < 25; i++) {
                 postsShortened.add(posts.get(i));
             }
+            comments = commentService.sortAndGet10Comments(postsShortened);
+
             model.addAttribute("posts", postsShortened);
         }
+        model.addAttribute("comments", comments);
         model.addAttribute("currentUserAccount", currentUserAccount);
-        
-        
     }
 
     public void post(String message) {

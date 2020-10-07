@@ -11,18 +11,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import projekti.Account.Account;
 import projekti.Account.AccountRepository;
 import projekti.Account.AccountService;
+import projekti.Comment.CommentService;
 
 @Controller
 public class PostController {
 
     @Autowired
     PostService postService;
+    
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("feed")
-    public String feed(Model model, @ModelAttribute Account account) {
+    public String feed(Model model) {
 
-        postService.sortAndShowMax25Posts(model, account);
-
+        postService.sortAndShowMax25Posts(model);
+        //commentService.sortAndShowMax10Comments(model);
+        commentService.addCommentServiceToModel(model);
+        
         return "feed";
     }
 
@@ -30,6 +36,7 @@ public class PostController {
     public String post(@RequestParam String message) {
 
         postService.post(message);
+        
 
         return "redirect:/feed";
     }
