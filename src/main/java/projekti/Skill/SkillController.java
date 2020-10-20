@@ -2,10 +2,8 @@ package projekti.Skill;
 
 import projekti.Account.Account;
 import projekti.Account.AccountRepository;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +27,6 @@ public class SkillController {
         if (skillName.isEmpty()) {
             return "redirect:/wall/" + user;
         }
-        //Account a = accountRepository.findByUsername(user);
         Account a = accountRepository.findByProfileName(user);
 
         if (skillService.skillExists(a, skillName, redirectAttributes)) {

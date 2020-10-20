@@ -24,8 +24,6 @@ public class Comment extends AbstractPersistable<Long> {
     @NotEmpty
     private String commentMessage;
 
-    //private int commentLikesAmount;
-
     @ManyToOne
     private Account commentAccount;
     

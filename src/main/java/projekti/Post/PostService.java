@@ -9,13 +9,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import projekti.Account.Account;
 import projekti.Account.AccountRepository;
 import projekti.Account.AccountService;
 import projekti.Comment.Comment;
 import projekti.Comment.CommentService;
-import projekti.Connection.ConnectionRepository;
 import projekti.Connection.ConnectionService;
 
 @Service

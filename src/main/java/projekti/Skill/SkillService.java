@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
@@ -62,7 +61,6 @@ public class SkillService {
      * @param skill
      */
     public void commend(String user, String skill) {
-        //Account a = accountRepository.findByUsername(user);
         Account a = accountRepository.findByProfileName(user);
         Skill s = skillRepository.findByAccountAndSkillName(a, skill);
         s.setCommendAmount(s.getCommendAmount() + 1);
@@ -78,8 +76,5 @@ public class SkillService {
         
         accountThatGaveCommendation.getCommendedSkills().add(s);
         accountRepository.save(accountThatGaveCommendation);
-        
-        
- 
     }
 }

@@ -5,7 +5,6 @@ import projekti.Account.Account;
 import projekti.Account.AccountRepository;
 import java.util.ArrayList;
 import java.util.List;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,7 +99,6 @@ public class ConnectionController {
     public String sendConnectRequest(@PathVariable String connectTo) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        //Account connectToAccount = accountRepository.findByUsername(connectTo);
         Account connectToAccount = accountRepository.findByProfileName(connectTo);
 
         if (connectionRepository.findByRequestSenderAndRequestReceiver(currentUserAccount, connectToAccount) == null) {
@@ -118,7 +116,6 @@ public class ConnectionController {
     public String acceptConnectRequest(@PathVariable String requestSender) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        //Account connectToAccount = accountRepository.findByUsername(requestSender);
         Account connectToAccount = accountRepository.findByProfileName(requestSender);
 
         Connection connection = connectionRepository.findByRequestSenderAndRequestReceiver(connectToAccount, currentUserAccount);
@@ -132,7 +129,6 @@ public class ConnectionController {
     public String rejectConnectRequest(@PathVariable String requestSender) {
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        //Account connectToAccount = accountRepository.findByUsername(requestSender);
         Account connectToAccount = accountRepository.findByProfileName(requestSender);
 
         Connection connection = connectionRepository.findByRequestSenderAndRequestReceiver(connectToAccount, currentUserAccount);
@@ -147,7 +143,6 @@ public class ConnectionController {
 
         String currentUser = accountService.getCurrentUserUsername();
         Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        //Account removeConnectionToAccount = accountRepository.findByUsername(connectionToBeRemoved);
         Account removeConnectionToAccount = accountRepository.findByProfileName(connectionToBeRemoved);
 
         if (connectionRepository.findByRequestSenderAndRequestReceiver(currentUserAccount, removeConnectionToAccount) != null) {
@@ -163,11 +158,9 @@ public class ConnectionController {
     @PostMapping("/connections/search")
     public String findPeople(@RequestParam String name, Model model) {
 
-        ////////////////////////////////////////////////////////////////////////
         String currentUser = accountService.getCurrentUserUsername();
         Account currentAccount = accountRepository.findByUsername(currentUser);
         latestSearchResultAccountProfileName = currentAccount.getProfileName();
-        //latestSearchResultAccount = currentAccount;
         List<Account> accounts = accountRepository.findAll();
 
         /*Remove the current user from the model so that the user wouldn´t
@@ -187,10 +180,6 @@ public class ConnectionController {
         rejectedAccounts.addAll(rejectedAccountsSent);
         rejectedAccounts.addAll(rejectedAccountsReceived);
 
-        ////////////////////////////////////////////////////////////////////////
-        //String currentUser = accountService.getCurrentUserUsername();
-        //Account currentUserAccount = accountRepository.findByUsername(currentUser);
-        //List<Account> allAccounts = accountRepository.findAll();
         accountsThatContainName.clear();
 
         //Check all the accounts if their name contains the searched text
@@ -207,10 +196,6 @@ public class ConnectionController {
             Account requestReceiver = c.getRequestReceiver();
             if (accountsThatContainName.contains(requestReceiver)) {
                 accountsSearchResultSentRequest.add(requestReceiver);
-                System.out.println("");
-                System.out.println("TEST TEST");
-                System.out.println("requestReceiver: " + requestReceiver.getProfileName());
-                System.out.println("");
             }
         }
 
@@ -220,10 +205,6 @@ public class ConnectionController {
             Account requestSender = c.getRequestSender();
             if (accountsThatContainName.contains(requestSender)) {
                 accountsSearchResultReceivedRequest.add(requestSender);
-                System.out.println("");
-                System.out.println("TEST TEST");
-                System.out.println("requestSender: " + requestSender.getProfileName());
-                System.out.println("");
             }
         }
 
@@ -233,10 +214,6 @@ public class ConnectionController {
             Account requestReceiver = c.getRequestReceiver();
             if (accountsThatContainName.contains(requestReceiver)) {
                 accountsSearchResultRejectedRequest.add(requestReceiver);
-                System.out.println("");
-                System.out.println("TEST TEST");
-                System.out.println("requestRejected: " + requestReceiver.getProfileName());
-                System.out.println("");
             }
         }
 
@@ -245,10 +222,6 @@ public class ConnectionController {
             Account requestSender = c.getRequestSender();
             if (accountsThatContainName.contains(requestSender)) {
                 accountsSearchResultRejectedRequest.add(requestSender);
-                System.out.println("");
-                System.out.println("TEST TEST");
-                System.out.println("requestRejected: " + requestSender.getProfileName());
-                System.out.println("");
             }
         }
 
