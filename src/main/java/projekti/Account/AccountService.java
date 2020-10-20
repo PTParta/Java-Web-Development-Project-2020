@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import projekti.Skill.Skill;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class AccountService {
@@ -41,11 +40,6 @@ public class AccountService {
 
         String currentUser = getCurrentUserUsername();
 
-        /*
-        //Get the current user who is browsing the website
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-         */
         //Check if the user is the same as the person whose wall he is looking at
         boolean userSameAsBrowsed;
 
@@ -85,37 +79,4 @@ public class AccountService {
             model.addAttribute("skillsNotTopThree", skillsNotTopThree);
         }
     }
-
-    /**
-     * During sign up checks if the User name and Profile name are available.
-     * Returns true if they are. Return false if they aren´t and redirects to
-     * the sign up page with error messages.
-     *
-     * @param account
-     * @return boolean
-     */
-    /*public boolean checkAccount(Account account, RedirectAttributes redirectAttributes) {
-        if (accountRepository.findByUsername(account.getUsername()) != null
-                && accountRepository.findByProfileName(account.getProfileName()) != null) {
-            String error1 = "User name " + account.getUsername() + " is already taken.";
-            redirectAttributes.addFlashAttribute("errorMessageUsername", error1);
-
-            String error2 = "Profile name " + account.getProfileName() + " is already taken.";
-            redirectAttributes.addFlashAttribute("errorMessageProfileName", error2);
-        }
-
-        if (accountRepository.findByUsername(account.getUsername()) != null) {
-            String error = "User name " + account.getUsername() + " is already taken.";
-            redirectAttributes.addFlashAttribute("errorMessageUsername", error);
-
-            return "redirect:/signup";
-        }
-
-        if (accountRepository.findByProfileName(account.getProfileName()) != null) {
-            String error = "Profile name " + account.getProfileName() + " is already taken.";
-            redirectAttributes.addFlashAttribute("errorMessageProfileName", error);
-
-            return "redirect:/signup";
-        }
-    }*/
 }

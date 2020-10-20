@@ -52,29 +52,11 @@ public class CommentService {
         postRepository.save(p);
     }
 
-    /**
-     * Gives a comparator on commentTime for Thymeleaf to use
-     *
-     * @param model
-     */
-    /*public void sortAndShowMax10Comments(Post post) {
-        //model.addAttribute("byDate", Comparator.comparing(Comment::getCommentTime));
-        //Sort posts on date and time. Newest first.
-        Comparator<Comment> compareByDateTime = (Comment c1, Comment c2) -> c1.getCommentTime().compareTo(c2.getCommentTime());
-        //model.addAttribute("byDate", compareByDateTime);
-    }*/
     public void addCommentServiceToModel(Model model) {
         CommentService commentService = new CommentService();
         model.addAttribute("commentService", commentService);
     }
 
-    /*public boolean sortAndShow10Comments(@ModelAttribute Post post, Model model){
-        
-        List<Comment> comments= post.getPostComments();
-        model.addAttribute("comments", comments);
-        
-        return true;
-    }*/
     public List<Comment> sortAndGet10Comments(List<Post> posts) {
 
         Comparator<Comment> compareByDateTimeComments = (Comment c1, Comment c2) -> c1.getCommentTime().compareTo(c2.getCommentTime());

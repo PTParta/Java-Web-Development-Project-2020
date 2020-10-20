@@ -22,8 +22,4 @@ public class Connection extends AbstractPersistable<Long> {
 
     //Status can be "pending", "connected", "rejected", or "removed"=connection deleted.
     private String status;
-
-    /*public List<Account> getAllAccounts(){
-        
-    }*/
 }

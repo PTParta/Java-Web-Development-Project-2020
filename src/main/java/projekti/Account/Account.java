@@ -2,15 +2,12 @@ package projekti.Account;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,11 +26,9 @@ import projekti.Skill.Skill;
     @UniqueConstraint(columnNames = {"username", "profileName"})})
 public class Account extends AbstractPersistable<Long> {
 
-    //@Column(unique=true)
     @Size(min = 3, max = 20)
     private String username;
 
-    //@Column(unique=true)
     @Size(min = 3, max = 20)
     private String profileName;
 
@@ -46,7 +41,7 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany
     private List<Skill> skills = new ArrayList<>();
 
-    //@Lob
+    //@Lob used for local testing. Doesn´t work in Heroku
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] profilePicture;
 
@@ -62,13 +57,4 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany
     private List<Comment> comments;
 
-    /*@OneToMany
-    private List<Connection> connections = new ArrayList<>();*/
- /*
-    private List<Account> receivedConnectionRequests = new ArrayList<>();
-    
-    private List<Account> sentConnectionRequests = new ArrayList<>();
-    
-    private List<Account> connected = new ArrayList<>();
-     */
 }
