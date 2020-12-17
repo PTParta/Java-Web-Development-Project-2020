@@ -41,8 +41,8 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany
     private List<Skill> skills = new ArrayList<>();
 
-    //@Lob used for local testing. Doesn´t work in Heroku
-    @Type(type = "org.hibernate.type.BinaryType")
+    @Lob    // used for local testing. Doesn´t work in Heroku
+    //@Type(type = "org.hibernate.type.BinaryType")
     private byte[] profilePicture;
 
     @ManyToMany
