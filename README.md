@@ -1,6 +1,14 @@
 # Java-Web-Development-Project-2020
 Helsinki University Web Server Programming Java course project
 
+Languages / frameworks used in this project are
+  - Java
+  - Spring Boot
+  - Thymeleaf
+  - HTML
+  - CSS
+  - Twitter Bootstrap
+  
 The website is hosted by Heroku: https://ancient-bayou-73135.herokuapp.com
 
 In this course project the task was to create a "LinkedIn" website.
@@ -12,7 +20,7 @@ Wall
     and others can commend those skills.
 
 Connections
-  - Send, accept, decline connection requests to/from other users.
+  - Send, accept, decline connection requests to / from other users.
   - Search people.
 
 Feed
