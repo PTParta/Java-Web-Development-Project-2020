@@ -25,3 +25,4 @@ work and the front end looks a bit rude.
 Improvements that could be made to the project are:
   - make the front end more appealing
   - optimize the back end
+  - refactor both Java and HTML files
