@@ -8,7 +8,7 @@ In this course project the task was to create a "LinkedIn" website.
 The website consists of the following pages:
 
 Wall
-  - The users personal wall where he/she can add skills
+  - The user´s personal wall where he/she can add skills
     and others can commend those skills.
 
 Connections
